@@ -151,4 +151,55 @@ db.libros.find({ $or: [{ precio: { $gt: 25 } }, { cantidad: { $lt: 15 } }] } )
 
 ```
 
-1. 
+1. ## AND y OR combinadas ##
+
+2. Mostrar los libros de la editorial Biblio con precio mayor a 40 o libros con la editorial Planeta con precio mayor 
+   mayor a 30.
+
+```json
+
+db.libros.find(
+{
+    $or: [
+        {$and: [{editorial:'Biblio'}, {precio:{$gt:40}}]},
+        {$and:[{editorial:{$eq:'Planeta'}},{precio:{$gt:30}}]}
+    ]
+}
+)
+
+```
+
+## Forma Simple
+
+db.libros.find(
+{
+    $or: [
+        {editorial:'Biblio', precio:{$gt:30}},
+        {editorial:{$eq:'Planeta'},precio:{$gt:20}}
+        ]
+}
+)
+
+## Proyeccion de Columnas
+
+*** Sintaxis ***
+
+db.coleccion.find(filtro, columna)
+
+```json
+db.libros.find({},{titulo:1})
+```
+
+1. Seleccionar todos los documentos mostrando el titulo y la aeditorial
+
+```json
+ db.libros.find({},{titulo:1, editorial:1})
+
+ db.libros.find({},{titulo:1, editorial:1, _id:0})
+```
+
+1. Seleccionar todos los documentos de la editorial Planeta, mostrando el titulo y la editorial
+
+```json
+ db.libros.find({ editorial: 'Planeta'},{titulo:1, editorial:1, _id:0})
+```
