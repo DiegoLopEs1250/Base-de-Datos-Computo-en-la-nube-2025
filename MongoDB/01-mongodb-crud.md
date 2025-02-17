@@ -203,3 +203,61 @@ db.libros.find({},{titulo:1})
 ```json
  db.libros.find({ editorial: 'Planeta'},{titulo:1, editorial:1, _id:0})
 ```
+
+## Operador exists (Permite saber si un campo se encuentra o no en un documento)
+
+```json
+db.libros.find( { editorial: { $exists: true } } )
+```
+
+3. Mostrar todos los documentos que no contengan el campo cantidad
+
+```json
+db.libros.find( { cantidad: { $exists: false } } )
+```
+
+## Operador type (Permite preguntar si un determinado campo corresponde con un tipo) ##
+
+[Operador Type](https://www.mongodb.com/docs/manual/reference/operator/query/type/#mongodb-query-op.-type)
+
+1. Mostrar todos los documentos donde el precio sea doubles
+
+```json
+db.libros.find({
+    precio: {$type:1}
+})
+
+```
+
+```JSON
+db.libros.find({ precio: { $type: 1 } }, {_id:0})
+db.libros.find({ precio: { $type: 1 } }, {_id:0, cantidad:0})
+
+```
+
+1. Seleccionar los documentos donde la editorial se del tipo entero 
+```json
+db.libros.find({ editorial:{$type:16} })
+db.libros.find({ editorial:{$type:'int'} })
+```
+
+
+2. Seleccionar todos los documentos la editorial sea string
+
+```json
+db.libros.find({ editorial:{$type:'string'} })
+db.libros.find({ editorial:{$type:2} })
+```
+
+## Practica de consultas ##
+1. Instalar las tools de mongodb
+[DatabaseTools](https://www.mongodb.com/try/download/database-tools)
+
+2. Cargar el json empleados (Debemos estar ubicados en la carpeta donde se encuentra el JSON empleados)
+
+- En local:
+  comando: 
+    mongoimport --db curso --collection empleados --file empleados.json
+
+- Docker:
+  mongoimport --db curso --collection empleados --file empleados.json --port 27018
