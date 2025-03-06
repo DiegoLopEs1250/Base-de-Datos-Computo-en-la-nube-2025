@@ -90,3 +90,21 @@ db.Ciudades.find({identificador:1, nombre:'Jeri Flowers', edad: 78})
 db.Ciudades.find({"consejeros.edad": {$gt:70}})
 ```
 
+4. Buscar en cosejeros en la posicion 21 que esten entre 70 y 80 años
+
+```json
+db.Ciudades.find({'consejeros.2.edad':{$gt:70, $lt:80}},{_id:0,'consejeros.edad':1})
+```
+
+5. Buscar en consejeros de la posicion 0 que sean mayores a 70 
+
+
+```json
+db.Ciudades.find({'consejeros.0.edad': {$gt:70}},{_id:0,nombre:1,'alcalde.edad':1})
+```
+
+6. Bucar consejeros mayores que sean mayores a 70
+
+```json
+db.Ciudades.find({"consejeros.edad": {$gt:70}})
+```
