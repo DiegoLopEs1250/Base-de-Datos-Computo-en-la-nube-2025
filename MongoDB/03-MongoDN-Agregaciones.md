@@ -50,7 +50,7 @@ db.libros.distinct('editorial')
 db.libros.aggregate({$match: {editorial: 'Terra'}})
 ```
 
-## $Projetc -> Incluir y remombrar campos
+## $Project -> Incluir y remombrar campos
 ```json
 db.libros.aggregate([
     {$match: {editorial: 'Terra'}},{$project:{_id:0, titulo:1, precio:1,NombreEditorial:'$editorial', editorial:1}}
